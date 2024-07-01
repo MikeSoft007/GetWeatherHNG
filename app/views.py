@@ -21,7 +21,7 @@ class GetTemperature(Resource):
             ip_address = request.remote_addr
 
          # IPinfo.io access token
-        ipinfo_access_token = 'd7d904abf3d13e'
+        ipinfo_access_token = os.environ.get("IPNFO_KEY")
 
         # Get city information based on IP address (using ipinfo.io)
         ipinfo_url = f'https://ipinfo.io/{ip_address}/json?token={ipinfo_access_token}'
@@ -32,7 +32,7 @@ class GetTemperature(Resource):
 
         
         # Used OpenWeatherMap API to get weather information
-        weather_api_key = 'b25ed573562b8f31fd436bb59507b9ed'
+        weather_api_key = os.environ.get("WEATHER_KEY")
         weather_url = f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={weather_api_key}&units=metric'
         response = requests.get(weather_url)
         weather_data = response.json()
